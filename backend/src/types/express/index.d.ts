@@ -1,6 +1,4 @@
-//declare module 'express';
-
-
+// declare module 'express';
 import express from "express";
 
 declare global {
