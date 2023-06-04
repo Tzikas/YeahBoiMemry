@@ -14,7 +14,7 @@ const URI = process.env.MONGODB_URI || 'mongodb://localhost/Toro';
 mongoose_1.default
     .connect(URI)
     .then(x => console.log(`Connected to ${x.connections[0].name}`))
-    .catch(() => console.error("Error connecting to Mongo"));
+    .catch((err) => console.error("Error connecting to Mongo", err));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     credentials: true,
