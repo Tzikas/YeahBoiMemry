@@ -9,7 +9,7 @@ type HelloBuilder = (name: string) => HelloResponse;
 const helloBuilder: HelloBuilder = name => ({ hello: name });
 
 export const rootHandler = (_req: Request, res: Response) => {
-  return res.send('API is working 🤓');
+  return res.send('API is working 🤓!!!');
 };
 
 export const helloHandler = (req: Request, res: Response) => {
@@ -20,9 +20,9 @@ export const helloHandler = (req: Request, res: Response) => {
   return res.json(response);
 };
 
-export const signupHandler =  (req: Request, res: Response) => {
+export const signupHandler = (req: Request, res: Response) => {
   const { params } = req;
-	console.log('sign up', req.body)
-	return res.json({body: req.body})
+  console.log('sign up', req.body)
+  return res.json({ body: req.body })
 }
 
