@@ -45,7 +45,10 @@ router.post('/authenticate', async (req: Request, res: Response) => {
     })
 })
 
-
+router.put('/lambda', async (req: Request, res: Response) => {
+    console.log('lamda hit')
+    console.log(req.body)
+})
 
 
 //Middle ware >>> Put this in the middle of any route where you want to authorize

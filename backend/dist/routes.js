@@ -50,6 +50,10 @@ exports.router.post('/authenticate', (req, res) => __awaiter(void 0, void 0, voi
         res.json({ user, token });
     });
 }));
+exports.router.put('/lambda', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('lamda hit');
+    console.log(req.body);
+}));
 //Middle ware >>> Put this in the middle of any route where you want to authorize
 function authorize(req, res, next) {
     let token = req.headers.authorization && req.headers.authorization.split(' ')[1]; //Token from front end 
