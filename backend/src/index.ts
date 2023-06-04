@@ -11,7 +11,7 @@ const URI = process.env.MONGODB_URI || 'mongodb://localhost/Toro'
 mongoose
   .connect(URI)
   .then(x => console.log(`Connected to ${x.connections[0].name}`))
-  .catch(() => console.error("Error connecting to Mongo"))
+  .catch((err) => console.error("Error connecting to Mongo", err))
 
 
 
