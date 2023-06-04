@@ -18,7 +18,7 @@ mongoose_1.default
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     credentials: true,
-    origin: ["http://localhost:3000", "https://yeahboi.netlify.app", "https://61o6pwyekh.execute-api.us-east-1.amazonaws.com/dev"] //Swap this with the client url 
+    origin: ["http://localhost:3000", "https://yeahboi.netlify.app", "https://61o6pwyekh.execute-api.us-east-1.amazonaws.com", "https://61o6pwyekh.execute-api.us-east-1.amazonaws.com/dev", "https://61o6pwyekh.execute-api.us-east-1.amazonaws.com/dev/hello-world"] //Swap this with the client url 
 }));
 app.use(express_1.default.json());
 app.use((0, morgan_1.default)('dev'));
