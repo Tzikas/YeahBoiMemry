@@ -1,5 +1,5 @@
 import express from 'express';
-import { rootHandler, helloHandler, signupHandler } from './handlers';
+import { rootHandler } from './handlers';
 import { router } from './routes'
 import cors from 'cors';
 import logger from 'morgan'
@@ -7,7 +7,7 @@ import mongoose from 'mongoose'
 require('dotenv').config();
 
 
-const URI = process.env.MONGODB_URI || 'mongodb://localhost/Toro'
+const URI = process.env.MONGODB_URI || 'mongodb://localhost/Pets'
 mongoose
   .connect(URI)
   .then(x => console.log(`Connected to ${x.connections[0].name}`))
@@ -25,12 +25,7 @@ app.use(
 app.use(express.json());
 app.use(logger('dev'));
 
-
-
 app.get('/', rootHandler);
-app.get('/hello/:name', helloHandler);
-app.post('/api/signup', signupHandler)
-
 app.use('/api', router)
 
 

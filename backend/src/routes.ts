@@ -18,6 +18,7 @@ router.get('/get-the-user', authorize, async (req: Request, res: Response) => {
 
 router.post('/add-post', authorize, async (req: Request, res: Response) => {
     let newPost = req.body
+    console.log(newPost, ' -=-=')
     newPost.userId = res.locals.user._id
     Post.create(newPost).then((post: any) => {
         res.json(post)

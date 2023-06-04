@@ -10,7 +10,7 @@ const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
 const mongoose_1 = __importDefault(require("mongoose"));
 require('dotenv').config();
-const URI = process.env.MONGODB_URI || 'mongodb://localhost/Toro';
+const URI = process.env.MONGODB_URI || 'mongodb://localhost/Pets';
 mongoose_1.default
     .connect(URI)
     .then(x => console.log(`Connected to ${x.connections[0].name}`))
@@ -23,8 +23,6 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.json());
 app.use((0, morgan_1.default)('dev'));
 app.get('/', handlers_1.rootHandler);
-app.get('/hello/:name', handlers_1.helloHandler);
-app.post('/api/signup', handlers_1.signupHandler);
 app.use('/api', routes_1.router);
 const port = process.env.PORT || '8000';
 app.listen(port, () => {

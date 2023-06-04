@@ -28,6 +28,7 @@ exports.router.get('/get-the-user', authorize, (req, res) => __awaiter(void 0, v
 }));
 exports.router.post('/add-post', authorize, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let newPost = req.body;
+    console.log(newPost, ' -=-=');
     newPost.userId = res.locals.user._id;
     Post.create(newPost).then((post) => {
         res.json(post);

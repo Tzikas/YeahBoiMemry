@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './App.css';
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import Profile from './components/Profile';
@@ -12,17 +12,17 @@ import { IUser } from './Interfaces';
 
 function App() {
 
-  let [user, setUser] = useState<IUser>({name:'', email:'', picture: ''})
+  let [user, setUser] = useState<IUser>({ name: '', email: '', picture: '' })
 
   const getTheUser = async () => {
     let res = await actions.getUser().catch(console.error)
-    if(res){
+    if (res) {
       setUser(res.data)
-    }    
+    }
   }
   const logOut = () => {
     localStorage.removeItem('token')
-    setUser({name:'', email:'', picture: ''})
+    setUser({ name: '', email: '', picture: '' })
   }
 
   useEffect(() => {
@@ -31,10 +31,10 @@ function App() {
 
 
 
-  return (  
-    <TheContext.Provider value={{getTheUser, user}}>
+  return (
+    <TheContext.Provider value={{ getTheUser, user }}>
       <Routes>
-        <Route path="/" element={<Layout user={user} setUser={setUser} logOut={logOut}/>}>
+        <Route path="/" element={<Layout user={user} setUser={setUser} logOut={logOut} />}>
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile />} />
           <Route path="dashboard" element={<Dashboard />} />
@@ -45,66 +45,66 @@ function App() {
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>
-      </TheContext.Provider>
+    </TheContext.Provider>
 
   );
 }
 
 
 
-function Layout(props:any) {  
+function Layout(props: any) {
   let { getTheUser } = useContext(TheContext)
 
   return (
     <>
       {/* A "layout route" is a good place to put markup you want to
           share across all the pages on your site, like navigation. */}
-          <h4>Welcome {props.user.name}</h4>
-          <hr />
+      <h4>Welcome {props.user && props.user.name}</h4>
+      <hr />
       <nav>
         <ul>
           <li>
             <Link to="/">Home</Link>
-          </li>        
-          {props.user.name ?
-          <>
+          </li>
+          {props.user && props.user.name ?
+            <>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <Link onClick={props.logOut} to="">LogOut</Link>
+              </li>
+            </>
+            :
             <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li> 
-            <Link onClick={props.logOut} to="">LogOut</Link>
-            </li>   
-            </>  
-           :
-           <li>
-            <GoogleLogin
-              onSuccess={async credentialResponse => {
-                await actions.authenticate(credentialResponse)
-                await getTheUser()
-              }}
-              onError={() => {
-                console.log('Login Failed');
-              }}
-              auto_select
-            />
+              <GoogleLogin
+                onSuccess={async credentialResponse => {
+                  await actions.authenticate(credentialResponse)
+                  await getTheUser()
+                }}
+                onError={() => {
+                  console.log('Login Failed');
+                }}
+                auto_select
+              />
             </li>
           }
 
-       
+
         </ul>
-        
+
       </nav>
-      
+
       <hr />
 
       {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
       <Outlet />
-      </>
+    </>
 
   );
 }
